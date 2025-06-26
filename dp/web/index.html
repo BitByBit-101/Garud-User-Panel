@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="project69">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>dp</title>
+  <link rel="manifest" href="manifest.json">
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js"></script>
+  <script async defer 
+   src ="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_8cshvQL4iBn8yL9MOjWAEKDOwP8K1q4"></script>
+  <script>
+    // let map;
+  
+    // function initializeMap(elementId, options) {
+    //   const mapContainer = document.getElementById(elementId);
+    //   map = new google.maps.Map(mapContainer, options);
+    // }
+    
+    // function updateMapCenter(newCenter) {
+    //   const latLng = new google.maps.LatLng(newCenter.lat, newCenter.lng);
+    //   map.setCenter(latLng);
+    //   new google.maps.Marker({
+    //     position: latLng, 
+    //     map: map,
+    //     title: 'Bus Location',
+    //   });
+    // }
+    let map; // Declare map globally to ensure it is accessible in both functions
+
+function initializeMap(elementId, options) {
+  const mapContainer = document.getElementById(elementId);
+  
+  // Check if the mapContainer is found
+  if (!mapContainer) {
+    console.error('Map container not found:', elementId);
+    return;
+  }
+
+  // Initialize the map and log its creation
+  map = new google.maps.Map(mapContainer, options);
+  console.log('Map initialized:', map); // Log to verify that the map was created
+}
+
+function updateMapCenter(newCenter) {
+  // Check if the map has been initialized before using it
+  if (!map) {
+    console.error('Map is not initialized. Please initialize the map first.');
+    return;
+  }
+
+  // Create a new LatLng object from the newCenter object
+  const latLng = new google.maps.LatLng(newCenter.lat, newCenter.lng);
+  
+  // Update the center of the map
+  map.setCenter(latLng);
+  console.log('Updating map center to:', latLng); // Log the new center
+
+  // Create a new marker for the bus location
+  new google.maps.Marker.AdvancedMarkerElement({
+    position: latLng, 
+    map: map,
+    title: 'Bus Location',
+  });
+}
+
+  </script>
+</head>
+<body>
+  <script src="flutter_bootstrap.js" async></script>
+  <div id="google-map" style="height: 80vh; width: 90vw;"></div>
+</body>
+</html>
